@@ -1,4 +1,5 @@
-import { hello } from 'lib/hello';
+import * as runLength from 'runLength';
 
-hello();
-hello();
+const str = 'Helloo';
+
+console.info(`${str} -> ${runLength.encode(str)}`);
