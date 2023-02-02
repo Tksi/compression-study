@@ -42,7 +42,7 @@ export const encode = (
   str: string
 ): {
   value: string;
-  table: Map<string, string>;
+  tree: Node;
 } => {
   // 出現頻度
   const freq: Node[] = Object.entries(
@@ -62,6 +62,35 @@ export const encode = (
 
   return {
     value: [...str].map((char) => table.get(char)).join(''),
-    table,
+    tree,
   };
+};
+
+export const decode = (encoded: string, tree: Node): string => {
+  let decoded = '';
+
+  let currentNode = tree;
+
+  for (const binary of encoded) {
+    switch (binary) {
+      case '0': {
+        currentNode = currentNode.left!;
+
+        break;
+      }
+
+      case '1': {
+        currentNode = currentNode.right!;
+
+        break;
+      }
+    }
+
+    if (currentNode.left === undefined && currentNode.right === undefined) {
+      decoded += currentNode.char;
+      currentNode = tree;
+    }
+  }
+
+  return decoded;
 };

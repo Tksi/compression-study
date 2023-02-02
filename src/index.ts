@@ -1,3 +1,4 @@
+import { Console } from 'node:console';
 import * as huffman from 'huffman';
 import * as runLength from 'runLength';
 
@@ -12,6 +13,11 @@ console.info(
 );
 
 console.info('# Huffman');
-const { value, table } = huffman.encode(str);
+const { value, tree } = huffman.encode(str);
 console.info(`encode: ${str} -> ${Number.parseInt(value, 2).toString(16)}`);
-console.info(table);
+console.info(
+  `decode: ${Number.parseInt(value, 2).toString(16)} -> ${huffman.decode(
+    value,
+    tree
+  )}`
+);
