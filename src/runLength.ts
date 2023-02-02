@@ -13,6 +13,14 @@ export const encode = (str: string): string => {
   return countArr.map((arr) => arr.join('')).join('');
 };
 
-const decode = (str: string): string => {};
+export const decode = (str: string): string => {
+  const countArr = [...str].reduce<[string, number][]>((prev, curr, i) => {
+    if (i % 2 === 1) {
+      prev.push([[...str][i - 1]!, Number(curr)]);
+    }
 
-console.log(encode('AlllGGsGsG'));
+    return prev;
+  }, []);
+
+  return countArr.map(([char, len]) => char.repeat(len)).join('');
+};
