@@ -1,4 +1,3 @@
-import { Console } from 'node:console';
 import * as huffman from 'huffman';
 import * as runLength from 'runLength';
 
